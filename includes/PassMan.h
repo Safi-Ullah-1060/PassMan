@@ -1,15 +1,16 @@
 #pragma once
+#include "MyStr.h"
 #include "User.h"
 
 class PassMan {
 public:
   PassMan(const PassMan &) = default;
   PassMan &operator=(const PassMan &) = default;
-  void addUser();
-  void removeUser(MyStr un);
-  bool login();
+  void addUser(MyStr UserName, MyStr PassKey);
+  void removeUser(MyStr UserName);
+  bool login(MyStr UserName, MyStr PassKey);
   unsigned int userExists(MyStr un);
-  static PassMan *makeNew();
+  static PassMan *getInstance();
   User *current_user;
 
 private:

@@ -1,24 +1,24 @@
 #pragma once
 #include "Data.h"
-#include <vector>
+#include "Token.h"
+#include "Vector.h"
 
 class Service {
 public:
   Service() = default;
   Service(const Service &) = default;
   Service &operator=(const Service &) = default;
-  void view();
   Data *getData();
-  void setName();
+  Vector<Token *> *getTokensList();
+  void setName(MyStr ServiceName);
   MyStr getName();
   ~Service() = default;
 
-  friend ostream &operator<<(ostream &out, Service s);
-  friend istream &operator>>(istream &in, Service s);
   friend ofstream &operator<<(ofstream &out, Service s);
   friend ifstream &operator>>(ifstream &in, Service s);
 
 private:
   MyStr name;
   Data data;
+  Vector<Token *> tokens;
 };

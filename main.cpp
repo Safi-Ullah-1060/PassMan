@@ -3,15 +3,16 @@
 #include <ftxui/dom/deprecated.hpp>
 #include <ftxui/dom/elements.hpp>
 #include <ftxui/dom/node.hpp>
-#include <ftxui/screen/MyStr.hpp>
 #include <ftxui/screen/screen.hpp>
+#include <ftxui/screen/string.hpp>
+#include <string>
 using namespace ftxui;
 using namespace std;
 
 #include "includes/PassMan.h"
 
 int main2() {
-  PassMan *master = PassMan::makeNew();
+  PassMan *master = PassMan::getInstance();
   bool success = 0;
   while (!success)
     success = master->login();
@@ -29,7 +30,7 @@ int main2() {
 
 int main3() {
   auto screen = ScreenInteractive::Fullscreen();
-  std::MyStr user, pass;
+  string user, pass;
   InputOption pw_opt;
   pw_opt.password = true;
 
@@ -53,7 +54,7 @@ int main3() {
 }
 
 // Each page function takes a reference to `page` so it can navigate
-Component make_login_page(int &page, std::MyStr &username) {
+Component make_login_page(int &page, string &username) {
   auto input = Input(&username, "username");
   auto btn_login = Button("Login", [&] {
     if (!username.empty())
@@ -72,7 +73,7 @@ Component make_login_page(int &page, std::MyStr &username) {
   });
 }
 
-Component make_dashboard_page(int &page, const std::MyStr &username) {
+Component make_dashboard_page(int &page, const string &username) {
   auto btn_logout = Button("Logout", [&] { page = 0; });
 
   return Renderer(btn_logout, [=, &page, &username] {
@@ -88,7 +89,7 @@ Component make_dashboard_page(int &page, const std::MyStr &username) {
 int main() {
   auto screen = ScreenInteractive::Fullscreen();
   int page = 0;
-  std::MyStr username;
+  string username;
 
   auto p0 = make_login_page(page, username);
   auto p1 = make_dashboard_page(page, username);

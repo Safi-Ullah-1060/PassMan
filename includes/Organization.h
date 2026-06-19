@@ -1,4 +1,6 @@
 #pragma once
+#include "User.h"
+#include "Vector.h"
 
 class Organization {
 public:
@@ -10,4 +12,7 @@ public:
   ~Organization();
 
 private:
+  MyStr name, masterKey;
+  User *admin;
+  Vector<User *> members;
 };

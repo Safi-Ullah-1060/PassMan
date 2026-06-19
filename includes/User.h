@@ -10,14 +10,15 @@ public:
   User(const User &) = default;
   User &operator=(const User &) = default;
   ~User() = default;
-  void setUsername();
-  void setPasskey();
+  void setUsername(MyStr _username);
+  void setPasskey(MyStr _passkey);
   MyStr getUsername();
   MyStr getPasskey();
-  void addService();
-  void listServices();
-  void removeService(MyStr name);
-  void viewService(unsigned int);
+  bool addService(MyStr ServiceName);
+  Vector<Service> *getServices();
+  void removeService(MyStr ServiceName);
+  unsigned int findService(MyStr ServiceName);
+  Service *getService(unsigned int);
 
 private:
   unsigned int uID;

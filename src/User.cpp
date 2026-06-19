@@ -2,34 +2,26 @@
 
 unsigned int User::service_count = 0;
 
-void User::setUsername() {
-  cout << "Enter new Username for [" << username << "] : ";
-  cin >> username;
-}
-void User::setPasskey() {
-  cout << "Enter new setPasskey for [" << username << "] : ";
-  cin >> passkey;
-}
+void User::setUsername(MyStr un) { username = un; }
+void User::setPasskey(MyStr pk) { passkey = pk; }
 MyStr User::getUsername() { return username; }
 MyStr User::getPasskey() { return passkey; }
-void User::addService() {
-  cout << "\033[2J\033[1;1H";
-  unsigned int limit = 0;
-  if (service_count < limit - 1) {
+bool User::addService(MyStr sn) {
+  unsigned int limit = 0 - 1;
+  if (service_count < limit) {
     services.push_back(Service());
-    services[services.size() - 1].setName();
+    services[services.size() - 1].setName(sn);
     service_count += 1;
     indexes.insert({string(services[service_count - 1].getName().getData()),
                     service_count});
   } else
-    cout << "Service Limit reached\n";
+    return 0;
+  return 1;
 }
-void User::listServices() {
-  cout << "\033[2J\033[1;1H";
-  cout << "Services List:\n";
-  for (int i = 0; i < services.size(); i++)
-    cout << i + 1 << " : " << services[i].getName() << endl;
+unsigned int User::findService(MyStr name) {
+  return indexes.at(string(name.getData()));
 }
+Vector<Service> *User::getServices() { return &services; }
 void User::removeService(MyStr name) {
   if (service_count > 0) {
     unsigned int target = indexes.at(string(name.getData()));
@@ -37,4 +29,8 @@ void User::removeService(MyStr name) {
     service_count -= 1;
   }
 }
-void User::viewService(unsigned int i) { services[i].view(); }
+Service *User::getService(unsigned int i) {
+  if (i > 0 and i < services.size())
+    return &services[i];
+  return nullptr;
+}

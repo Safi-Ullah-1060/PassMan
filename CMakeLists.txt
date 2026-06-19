@@ -5,10 +5,13 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(SOURCES
-  src/PassMan.cpp
-  src/User.cpp
   src/Data.cpp
+  src/MyStr.cpp
+  src/Organization.cpp
+  src/PassMan.cpp
   src/Service.cpp
+  src/Token.cpp
+  src/User.cpp
 )
 include(FetchContent)
  

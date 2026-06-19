@@ -67,7 +67,11 @@ MyStr &MyStr::operator+=(const MyStr &b) {
   *this = temp;
   return *this;
 }
-
+MyStr &MyStr::operator+=(char x) {
+  MyStr temp(1, x);
+  *this += temp;
+  return *this;
+}
 void MyStr::print() {
   for (int i = 0; i < len; i++)
     cout << Cs[i];
@@ -129,6 +133,7 @@ int MyStr::compare(const MyStr &a) {
   }
   return 0;
 }
+bool MyStr::is_empty() { return len == 0; }
 bool MyStr::is_equal(const MyStr &a) {
   int s = min(len, a.len);
   for (int i = 0; Cs[i] != '\0' && a.Cs[i] != '\0' && i < s; i++)

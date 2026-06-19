@@ -9,10 +9,12 @@ public:
   Data() = default;
   Data(const Data &) = default;
   Data &operator=(const Data &) = default;
-  void view();
-  void setEmail();
-  void setUserName();
-  void setPassword();
+  MyStr getEmail();
+  MyStr getUserName();
+  MyStr getPassword();
+  void setEmail(MyStr EMail);
+  void setUserName(MyStr UserName);
+  void setPassword(MyStr Password);
   ~Data() = default;
 
   friend ostream &operator<<(ostream &out, Data d);
