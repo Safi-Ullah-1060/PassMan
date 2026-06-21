@@ -1,7 +1,7 @@
 #include "../includes/MyStr.h"
 #include <fstream>
 
-MyStr::MyStr() : len{0}, cap{1}, Cs{nullptr} {};
+MyStr::MyStr() : len{0}, cap{0}, Cs{nullptr} {};
 MyStr::MyStr(const MyStr &b) : len{0}, cap{0}, Cs{nullptr} {
   if (b.Cs != nullptr && b.len > 0) {
     len = b.len, cap = b.cap;
@@ -9,6 +9,12 @@ MyStr::MyStr(const MyStr &b) : len{0}, cap{0}, Cs{nullptr} {
     for (int i = 0; i < len; i++)
       Cs[i] = b.Cs[i];
   }
+}
+MyStr::MyStr(const string &s) : len(s.length()), cap(len + 1) {
+  Cs = len == 0 ? nullptr : new char[cap]{};
+  if (Cs)
+    for (int i = 0; i < len; i++)
+      Cs[i] = s[i];
 }
 MyStr::MyStr(const char *c) : len{0}, cap{1} {
   if (c == nullptr) {
@@ -88,6 +94,7 @@ int MyStr::stoi() {
   }
   return n;
 }
+string MyStr::toStr() { return string(getData()); }
 MyStr MyStr::itos(int a) {
   MyStr temp;
   int v = a;

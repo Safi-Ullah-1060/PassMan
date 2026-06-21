@@ -1,6 +1,8 @@
 #pragma once
+#include "../src/crypto.hpp"
 #include "MyStr.h"
 #include "User.h"
+#include <cstdint>
 
 class PassMan {
 public:
@@ -10,8 +12,18 @@ public:
   void removeUser(MyStr UserName);
   bool login(MyStr UserName, MyStr PassKey);
   unsigned int userExists(MyStr un);
+
+  bool loadData();
+  bool loadPassManDat();
+  bool loadUserData(User *u);
+
+  bool saveData();
+  bool savePassManDat();
+  bool saveUserData(User *u);
+
   static PassMan *getInstance();
-  User *current_user;
+  static User *current_user;
+  bool ensureUserDataTreeExists();
 
 private:
   PassMan() = default;
@@ -20,4 +32,6 @@ private:
   Vector<User *> users;
   MyStr MasterPassword;
   static unsigned int user_count;
+  std::uint8_t m_key[32] = {};
+  bool m_key_set = false;
 };

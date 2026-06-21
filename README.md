@@ -1,4 +1,6 @@
-# oop-semproj-cs25b-Safi-Ullah-1060
+# PassMan: Your friendly Password Manager
+
+## oop-semproj-cs25b-Safi-Ullah-1060
 
 Ttis software enables you to manage all your `passwords` and `Tokens`.
 

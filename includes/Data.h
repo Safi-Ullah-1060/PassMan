@@ -6,7 +6,8 @@ using namespace std;
 
 class Data {
 public:
-  Data() = default;
+  explicit Data(MyStr UserName = MyStr(), MyStr EMail = MyStr(),
+                MyStr Password = MyStr());
   Data(const Data &) = default;
   Data &operator=(const Data &) = default;
   MyStr getEmail();

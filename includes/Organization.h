@@ -1,18 +1,18 @@
 #pragma once
-#include "User.h"
+#include "MyStr.h"
 #include "Vector.h"
+
+class User;
 
 class Organization {
 public:
   Organization();
-  Organization(Organization &&) = default;
   Organization(const Organization &) = default;
-  Organization &operator=(Organization &&) = default;
   Organization &operator=(const Organization &) = default;
   ~Organization();
 
 private:
-  MyStr name, masterKey;
+  MyStr name;
   User *admin;
   Vector<User *> members;
 };

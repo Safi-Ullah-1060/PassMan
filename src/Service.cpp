@@ -1,5 +1,9 @@
 #include "../includes/Service.h"
 
+Service::Service() : name(), data() {}
+Service::Service(MyStr ServiceName, MyStr ServiceUserName, MyStr EMail,
+                 MyStr Password)
+    : name(ServiceName), data(Data(ServiceUserName, EMail, Password)) {}
 ofstream &operator<<(ofstream &out, Service s) {
   if (!s.name.is_empty() and out.is_open())
     out << s.name << endl << s.data;

@@ -6,11 +6,11 @@ void User::setUsername(MyStr un) { username = un; }
 void User::setPasskey(MyStr pk) { passkey = pk; }
 MyStr User::getUsername() { return username; }
 MyStr User::getPasskey() { return passkey; }
-bool User::addService(MyStr sn) {
+bool User::addService(MyStr ServuceName, MyStr ServiceUserName, MyStr EMail,
+                      MyStr Password) {
   unsigned int limit = 0 - 1;
   if (service_count < limit) {
-    services.push_back(Service());
-    services[services.size() - 1].setName(sn);
+    services.push_back(Service(ServuceName, ServiceUserName, EMail, Password));
     service_count += 1;
     indexes.insert({string(services[service_count - 1].getName().getData()),
                     service_count});

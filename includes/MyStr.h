@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <string>
 using namespace std;
 
 class MyStr {
@@ -11,6 +12,7 @@ private:
 public:
   MyStr();
   MyStr(const MyStr &);
+  MyStr(const string &);
   MyStr(const char *);
   MyStr(int, char);
   MyStr(int);
@@ -21,6 +23,7 @@ public:
   void print();
   void replace_first(char);
   int stoi();
+  string toStr();
   MyStr itos(int);
   MyStr trim();
   int compare(const MyStr &);

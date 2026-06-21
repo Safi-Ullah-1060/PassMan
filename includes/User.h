@@ -1,7 +1,8 @@
 #pragma once
+#include "MyStr.h"
+#include "Organization.h"
 #include "Service.h"
 #include "Vector.h"
-#include <string>
 #include <unordered_map>
 
 class User {
@@ -14,16 +15,32 @@ public:
   void setPasskey(MyStr _passkey);
   MyStr getUsername();
   MyStr getPasskey();
-  bool addService(MyStr ServiceName);
+  bool addService(MyStr ServiceName, MyStr ServiceUserName = MyStr(),
+                  MyStr EMail = MyStr(), MyStr Password = MyStr());
   Vector<Service> *getServices();
   void removeService(MyStr ServiceName);
   unsigned int findService(MyStr ServiceName);
   Service *getService(unsigned int);
 
-private:
+protected:
   unsigned int uID;
   MyStr username, passkey;
   Vector<Service> services;
   unordered_map<string, unsigned int> indexes;
   static unsigned int service_count;
+};
+
+class Admin {
+public:
+  Admin();
+  Admin(Admin &&) = default;
+  Admin(const Admin &) = default;
+  Admin &operator=(Admin &&) = default;
+  Admin &operator=(const Admin &) = default;
+  ~Admin();
+
+private:
+  Vector<Organization> orgs;
+  Vector<MyStr> MasterPasswords;
+  static unsigned int orgCount;
 };
