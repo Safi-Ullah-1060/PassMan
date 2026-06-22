@@ -1,20 +1,19 @@
 #pragma once
 #include <string>
 
-// Which screen is currently active
 enum class AppScreen {
+  SetMasterPassword, // first launch
   Login,
+  AddUser, // from login screen
   Dashboard,
   AddEntry,
   EditEntry,
 };
 
-// Passed by reference into every screen so they can read/mutate shared state
 struct AppState {
   AppScreen screen = AppScreen::Login;
-  int selectedIndex = 0;     // highlighted service in left panel
-  int editIndex = -1;        // which service is being edited (-1 = new)
-  bool showPassword = false; // reveal toggle in detail panel
-  std::string statusMessage =
-      ""; // transient feedback ("Saved!", "Wrong password", …)
+  int selectedIndex = 0;
+  int editIndex = -1;
+  bool showPassword = false;
+  std::string statusMessage = "";
 };

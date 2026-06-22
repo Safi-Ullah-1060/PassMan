@@ -22,7 +22,7 @@ target_include_directories(monocypher PUBLIC
 
 # ── PassMan executable ────────────────────────────────────────────────────────
 add_executable(PassMan
-    ${CMAKE_SOURCE_DIR}/src/main.cpp
+    ${CMAKE_SOURCE_DIR}/main.cpp
     ${CMAKE_SOURCE_DIR}/src/Data.cpp
     ${CMAKE_SOURCE_DIR}/src/MyStr.cpp
     ${CMAKE_SOURCE_DIR}/src/Organization.cpp
@@ -44,6 +44,9 @@ target_link_libraries(PassMan PRIVATE
     ftxui::dom
     ftxui::component
 )
+
+# target_compile_options(PassMan PRIVATE -fsanitize=address -g)
+# target_link_options(PassMan PRIVATE -fsanitize=address)
 
 # ── Static runtime (Windows) ──────────────────────────────────────────────────
 if(MSVC)

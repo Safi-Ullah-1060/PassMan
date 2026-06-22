@@ -1,5 +1,4 @@
 #pragma once
-#include "../src/crypto.hpp"
 #include "MyStr.h"
 #include "User.h"
 #include <cstdint>
@@ -10,6 +9,7 @@ public:
   PassMan &operator=(const PassMan &) = default;
   void addUser(MyStr UserName, MyStr PassKey);
   void removeUser(MyStr UserName);
+  void setMasterPassword(MyStr _MasterPassword);
   bool login(MyStr UserName, MyStr PassKey);
   unsigned int userExists(MyStr un);
 

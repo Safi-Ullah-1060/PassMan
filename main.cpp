@@ -1,4 +1,4 @@
-#include "../UI/App.hpp"
+#include "UI/App.hpp"
 
 int main() {
   PassMan::getInstance();

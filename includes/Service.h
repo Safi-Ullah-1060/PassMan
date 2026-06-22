@@ -11,9 +11,10 @@ public:
   Service(const Service &) = default;
   Service &operator=(const Service &) = default;
   Data *getData();
+  void setData(MyStr ServiceUserName, MyStr EMail, MyStr Password);
   Vector<Token *> *getTokensList();
-  void setName(MyStr ServiceName);
   MyStr getName();
+  void setName(MyStr);
   ~Service() = default;
 
   friend ofstream &operator<<(ofstream &out, Service s);

@@ -17,6 +17,9 @@ ifstream &operator>>(ifstream &in, Service s) {
   return in;
 }
 
+void Service::setData(MyStr n, MyStr e, MyStr p) {
+  data.setUserName(n), data.setEmail(e), data.setPassword(p);
+}
 Data *Service::getData() { return &data; }
 Vector<Token *> *Service::getTokensList() { return &tokens; }
 void Service::setName(MyStr n) { name = n; }

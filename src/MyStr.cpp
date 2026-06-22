@@ -41,14 +41,18 @@ MyStr::MyStr(int a) : len{0}, cap{0}, Cs{nullptr} { *this = itos(a); }
 MyStr &MyStr::operator=(const MyStr &b) {
   if (this == &b)
     return *this;
-  if (Cs != nullptr)
-    delete[] Cs;
-  len = b.len, cap = b.cap;
-  Cs = new char[cap]{};
-  if (b.Cs != nullptr && b.len > 0)
-    for (int i = 0; i < len; i++)
-      Cs[i] = b.Cs[i];
-  Cs[len] = '\0';
+  delete[] Cs;
+  Cs = nullptr;
+  len = b.len;
+  cap = b.cap;
+  if (cap > 0) {
+    Cs = new char[cap]{};
+    if (b.Cs && b.len > 0)
+      for (int i = 0; i < len; i++)
+        Cs[i] = b.Cs[i];
+    if (len < cap)
+      Cs[len] = '\0';
+  }
   return *this;
 }
 MyStr MyStr::operator+(const MyStr &b) {
@@ -94,7 +98,11 @@ int MyStr::stoi() {
   }
   return n;
 }
-string MyStr::toStr() { return string(getData()); }
+string MyStr::toStr() {
+  if (Cs == nullptr || len == 0)
+    return "";
+  return string(Cs, len);
+}
 MyStr MyStr::itos(int a) {
   MyStr temp;
   int v = a;
@@ -420,12 +428,14 @@ istream &operator>>(istream &in, MyStr &a) {
 ifstream &operator>>(ifstream &in, MyStr &a) {
   a.len = 0;
   char ch;
-  while (true) {
+  if (!a.Cs || a.cap == 0) {
+    a.cap = 16;
+    a.Cs = new char[a.cap]{};
+  }
+  while (in.get(ch) && ch != '\n') {
     if (a.len + 1 >= a.cap)
       a.regrow();
-    in.get(ch);
-    if (ch != '\n')
-      a.Cs[a.len++] = ch;
+    a.Cs[a.len++] = ch;
   }
   a.Cs[a.len] = '\0';
   return in;
