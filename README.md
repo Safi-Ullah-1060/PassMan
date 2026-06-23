@@ -13,18 +13,24 @@ This software enables you to manage all your `passwords` and `Tokens`.
 ## Manual Build
 ## Clone the Repo
 - Clone the repo and `cd path/to/Repo-Root`
+
+### Linux
 - Make build directory
 ```
 mkdir build && cd build
 ```
-- Generate Make files and make the binary
-
-### Linux
+- Generate Make files and make the binary. Then Run the binary.
 ```
 cmake .. && make
 ./PassMan
 ```
 ### Windows
+- Make build directory
+```
+mkdir build-win && cd build-win
+```
+- Generate Make files and make the binary. Then Run the binary.
+
 ```
 cmake .. -DCMAKE_TOOLCHAIN_FILE=../toolchain-windows.cmake -DCMAKE_BUILD_TYPE=Release && make
 .\PassMan.exe
