@@ -10,6 +10,26 @@ This software enables you to manage all your `passwords` and `Tokens`.
 ### Windows
 - Dowload the `PassMan.exe` binary from the assets in `Releases` page
 
+## Manual Build
+## Clone the Repo
+- Clone the repo and `cd path/to/Repo-Root`
+- Make build directory
+```
+mkdir build && cd build
+```
+- Generate Make files and make the binary
+
+### Linux
+```
+cmake .. && make
+./PassMan
+```
+### Windows
+```
+cmake .. -DCMAKE_TOOLCHAIN_FILE=../toolchain-windows.cmake -DCMAKE_BUILD_TYPE=Release && make
+.\PassMan.exe
+```
+
 ## Features
 - Adding users
 - Organization has multiple users and one admin who manages all the users and their service data
