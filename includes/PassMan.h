@@ -15,15 +15,13 @@ public:
 
   bool loadData();
   bool loadPassManDat();
-  bool loadUserData(User *u);
 
   bool saveData();
   bool savePassManDat();
-  bool saveUserData(User *u);
 
   static PassMan *getInstance();
   static User *current_user;
-  bool ensureUserDataTreeExists();
+  bool ensureUserDataTreeExists(User *user);
 
 private:
   PassMan() = default;
@@ -32,6 +30,10 @@ private:
   Vector<User *> users;
   MyStr MasterPassword;
   static unsigned int user_count;
-  std::uint8_t m_key[32] = {};
-  bool m_key_set = false;
+  uint8_t m_master_key[32] = {};
+  uint8_t m_user_key[32] = {};
+  bool m_master_key_set = false;
+  bool m_user_key_set = false;
+  bool saveUserData(User *u);
+  bool loadUserData(User *u);
 };

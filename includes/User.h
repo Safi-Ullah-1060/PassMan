@@ -18,7 +18,8 @@ public:
   bool addService(MyStr ServiceName, MyStr ServiceUserName = MyStr(),
                   MyStr EMail = MyStr(), MyStr Password = MyStr());
   Vector<Service> *getServices();
-  void removeService(MyStr ServiceName);
+  void resetServices();
+  bool removeService(MyStr ServiceName);
   unsigned int findService(MyStr ServiceName);
   Service *getService(unsigned int);
 

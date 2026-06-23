@@ -69,12 +69,14 @@ MyStr MyStr::operator+(const MyStr &b) {
 MyStr &MyStr::operator+=(const MyStr &b) {
   MyStr temp;
   temp.len = len + b.len, temp.cap = temp.len * 2 + 1;
-  temp.Cs = new char[cap]{};
+  temp.Cs = new char[temp.cap]{};
   for (int i = 0; i < len; i++)
     temp.Cs[i] = Cs[i];
   for (int i = 0; i < b.len; i++)
     temp.Cs[i + len] = b.Cs[i];
-  *this = temp;
+  delete[] Cs;
+  len = temp.len, cap = temp.cap;
+  Cs = temp.Cs, temp.Cs = nullptr;
   return *this;
 }
 MyStr &MyStr::operator+=(char x) {

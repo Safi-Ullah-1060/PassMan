@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # ── FetchContent: ftxui ───────────────────────────────────────────────────────
 include(FetchContent)
+set(FETCHCONTENT_BASE_DIR ${CMAKE_SOURCE_DIR}/_deps CACHE PATH "" FORCE)
 FetchContent_Declare(ftxui
     GIT_REPOSITORY https://github.com/ArthurSonzogni/FTXUI
     GIT_TAG v6.1.9
@@ -55,4 +56,5 @@ if(MSVC)
 endif()
 if(MINGW)
     target_link_options(PassMan PRIVATE -static -static-libgcc -static-libstdc++)
+    target_link_libraries(PassMan PRIVATE bcrypt)
 endif()

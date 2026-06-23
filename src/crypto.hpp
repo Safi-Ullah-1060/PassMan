@@ -1,5 +1,13 @@
 #pragma once
 
+// clang-format off
+#ifdef _WIN32
+  #define WIN32_LEAN_AND_MEAN
+  #include <windows.h>
+  #include <bcrypt.h>
+#endif
+// clang-format on
+
 #include "../third-party/monocypher/monocypher.h"
 
 #include <cstdint>
@@ -30,12 +38,9 @@ static constexpr uint32_t ARGON2_PASSES = 3;
 // ── Cross-platform CSPRNG
 // ─────────────────────────────────────────────────────
 inline void secure_random(uint8_t *buf, size_t len) {
-#if defined(_WIN32)
-#include <bcrypt.h>
-#pragma comment(lib, "bcrypt.lib")
-  if (BCryptGenRandom(nullptr, buf, static_cast<ULONG>(len),
-                      BCRYPT_USE_SYSTEM_PREFERRED_RNG) != 0)
-    throw std::runtime_error("BCryptGenRandom failed");
+#ifdef _WIN32
+  BCryptGenRandom(nullptr, buf, static_cast<ULONG>(len),
+                  BCRYPT_USE_SYSTEM_PREFERRED_RNG);
 #else
   FILE *f = fopen("/dev/urandom", "rb");
   if (!f)

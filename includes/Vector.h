@@ -68,6 +68,8 @@ public:
     sz++;
   }
 
+  void clear() { sz = 0; }
+
   void remove_at(int index) {
     if (index < 0 || index >= sz)
       return;

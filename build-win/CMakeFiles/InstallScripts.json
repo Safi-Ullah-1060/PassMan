@@ -1,0 +1,10 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/safi/Uni-Data/Sem-IV/OOP/PassMan/build-win/cmake_install.cmake",
+		"/home/safi/Uni-Data/Sem-IV/OOP/PassMan/_deps/ftxui-build/cmake_install.cmake",
+		"/home/safi/Uni-Data/Sem-IV/OOP/PassMan/_deps/ftxui-build/examples/cmake_install.cmake",
+		"/home/safi/Uni-Data/Sem-IV/OOP/PassMan/_deps/ftxui-build/doc/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

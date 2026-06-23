@@ -1,5 +1,6 @@
 #pragma once
 #include "../includes/PassMan.h"
+#include "../src/Paths.hpp"
 #include "AddEditScreen.hpp"
 #include "AddUserScreen.hpp"
 #include "AppState.hpp"
@@ -19,8 +20,8 @@ inline void RunApp() {
 
   // Determine initial screen
   PassMan *pm = PassMan::getInstance();
-  std::string home = std::getenv("HOME");
-  std::ifstream test(home + "/.local/share/PassMan/PassMan.dat");
+  std::string baseDir = getBaseDir();
+  std::ifstream test(baseDir + "PassMan.dat");
   state.screen = test.good() ? AppScreen::Login : AppScreen::SetMasterPassword;
 
   auto set_master_screen = SetMasterPasswordScreen(state);

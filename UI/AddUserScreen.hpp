@@ -35,7 +35,7 @@ inline Component AddUserScreen(AppState &state) {
           return;
         }
         pm->addUser(MyStr(user_str->c_str()), MyStr(pass_str->c_str()));
-        pm->saveData();
+        pm->savePassManDat();
         state.statusMessage = "User added. Please log in.";
         state.screen = AppScreen::Login;
       });

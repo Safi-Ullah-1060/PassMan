@@ -19,18 +19,45 @@ bool User::addService(MyStr ServuceName, MyStr ServiceUserName, MyStr EMail,
   return 1;
 }
 unsigned int User::findService(MyStr name) {
-  return indexes.at(string(name.getData()));
+  std::string key(name.getData());
+  auto it = indexes.find(key);
+  if (it == indexes.end())
+    return 0;
+  return it->second;
 }
 Vector<Service> *User::getServices() { return &services; }
-void User::removeService(MyStr name) {
-  if (service_count > 0) {
-    unsigned int target = indexes.at(string(name.getData()));
-    services.remove_at(target);
-    service_count -= 1;
-  }
+bool User::removeService(MyStr name) {
+  if (service_count == 0)
+    return false;
+
+  std::string key(name.getData());
+  auto it = indexes.find(key);
+  if (it == indexes.end())
+    return false;
+
+  unsigned int target = it->second;
+
+  // Remove from vector
+  services.remove_at(target - 1);
+  service_count--;
+
+  // Remove from map
+  indexes.erase(it);
+
+  // Shift down all indexes that were after the removed element
+  for (auto &pair : indexes)
+    if (pair.second > target)
+      pair.second--;
+
+  return true;
+}
+void User::resetServices() {
+  services.clear();
+  indexes.clear();
+  service_count = 0;
 }
 Service *User::getService(unsigned int i) {
-  if (i > 0 and i < services.size())
+  if (i >= 0 and i < services.size())
     return &services[i];
   return nullptr;
 }
